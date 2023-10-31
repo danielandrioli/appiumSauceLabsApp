@@ -4,7 +4,7 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 
-public class AlertDialog {
+public class AlertDialog {  // This alert dialog is the same for all dialogs.
     private AppiumDriver driver;
     private By confirtmBtn = AppiumBy.id("android:id/button1");
     private By cancelBtn = AppiumBy.id("android:id/button2");

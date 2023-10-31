@@ -39,7 +39,8 @@ public class LoginTest extends BaseAndroidSauceLabsTest {
     public void logoutShouldRedirectToLoginPage() {
         new NavigationDrawer(driver)
                 .openNavigationDrawer()
-                .goToLogout(true);
+                .goToLogout()
+                .confirm();
 
         Assert.assertEquals(driver.findElement(AppiumBy.xpath("(//android.widget.TextView[@text=\"Login\"])[1]"))
                 .getText(), "Login");

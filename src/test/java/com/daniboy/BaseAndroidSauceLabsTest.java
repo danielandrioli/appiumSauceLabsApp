@@ -22,7 +22,7 @@ public class BaseAndroidSauceLabsTest {
         } catch (MalformedURLException exception) {
             System.out.println("Exception! " + exception.getLocalizedMessage());
         }
-
+        options.setAppActivity(".MainActivity");
     }
 
     private UiAutomator2Options getAndroidSauceLabsOptions() {
@@ -31,7 +31,6 @@ public class BaseAndroidSauceLabsTest {
         options.setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2); //Optional. It's the default value.
         options.setPlatformName(Platform.ANDROID.name()); //Optional. It's the default value.
 
-        options.setPlatformName("13");
         options.setDeviceName("emulator-5554");
 
         options.setAppPackage("com.saucelabs.mydemoapp.rn");

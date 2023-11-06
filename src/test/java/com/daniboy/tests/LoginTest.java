@@ -1,6 +1,7 @@
 package com.daniboy.tests;
 
 import com.daniboy.BaseAndroidSauceLabsTest;
+import com.daniboy.pageobjects.CatalogPage;
 import com.daniboy.pageobjects.LoginPage;
 import com.daniboy.pageobjects.components.NavigationDrawer;
 import io.appium.java_client.AppiumBy;
@@ -24,10 +25,8 @@ public class LoginTest extends BaseAndroidSauceLabsTest {
     public void loginWithInvalidCredentialsShouldFail() {
         LoginPage loginPg = new NavigationDrawer(driver)
                 .openNavigationDrawer()
-                .goToLoginPage();
-
-
-        loginPg.login("doesntexist@example.com", "10203040");
+                .goToLoginPage()
+                .login("doesntexist@example.com", "10203040");
 
         Assert.assertEquals(driver.findElement(AppiumBy.xpath("(//android.widget.TextView[@text=\"Login\"])[1]"))
                 .getText(), "Login"); // Assert user stays in the same page

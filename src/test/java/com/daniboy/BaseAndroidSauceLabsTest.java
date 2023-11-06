@@ -4,6 +4,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.remote.AutomationName;
 import org.openqa.selenium.Platform;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 
 import java.net.MalformedURLException;
@@ -37,5 +38,10 @@ public class BaseAndroidSauceLabsTest {
         options.setApp(System.getProperty("user.dir") + "/apps/Android-MyDemoAppRN.1.3.0.build-244.apk");
 
         return options;
+    }
+
+    @AfterTest
+    public void tardown() {
+        driver.quit();
     }
 }

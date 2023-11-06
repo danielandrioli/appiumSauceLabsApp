@@ -1,8 +1,9 @@
 package com.daniboy.pageobjects;
 
-import com.daniboy.pageobjects.components.NavigationDrawer;
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.pagefactory.AndroidBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AndroidFindBys;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -10,9 +11,14 @@ import org.openqa.selenium.support.PageFactory;
 public abstract class BasePage {
     @AndroidFindBy(accessibility = "cart badge")
     protected WebElement cart;
-    protected AppiumDriver driver;
+    protected AndroidDriver driver;
+    @AndroidFindBys({
+            @AndroidBy(accessibility = "container header"),
+            @AndroidBy(xpath = "(//android.widget.TextView[@class=\"android.widget.TextView\"])")
+    })
+    protected WebElement header;
 
-    public BasePage(AppiumDriver driver) {
+    public BasePage(AndroidDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
@@ -22,7 +28,5 @@ public abstract class BasePage {
         return new CartPage(driver);
     }
 
-    public static NavigationDrawer navigate(AppiumDriver driver) { //será q colocar esse método estático aqui ou deixar
-        return new NavigationDrawer(driver);                      // que estanciem o NavigationDrawer?
-    }
+    public String getHeaderText() { return header.getText(); }
 }

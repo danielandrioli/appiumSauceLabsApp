@@ -1,10 +1,9 @@
 package com.daniboy.tests;
 
 import com.daniboy.BaseAndroidSauceLabsTest;
-import com.daniboy.pageobjects.CatalogPage;
 import com.daniboy.pageobjects.LoginPage;
+import com.daniboy.pageobjects.ProductPage;
 import com.daniboy.pageobjects.components.NavigationDrawer;
-import io.appium.java_client.AppiumBy;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -17,21 +16,18 @@ public class LoginTest extends BaseAndroidSauceLabsTest {
                 .goToLoginPage()
                 .login("bob@example.com", "10203040");
 
-        Assert.assertEquals(driver.findElement(AppiumBy.xpath("//android.widget.TextView[@text=\"Products\" and @class=\"android.widget.TextView\"]"))
-                .getText(), "Products");
+        Assert.assertEquals(new ProductPage(driver).getHeaderText(), "Products");
     }
 
     @Test
     public void loginWithInvalidCredentialsShouldFail() {
-        LoginPage loginPg = new NavigationDrawer(driver)
+        LoginPage loginPage = new NavigationDrawer(driver)
                 .openNavigationDrawer()
                 .goToLoginPage()
                 .login("doesntexist@example.com", "10203040");
 
-        Assert.assertEquals(driver.findElement(AppiumBy.xpath("(//android.widget.TextView[@text=\"Login\"])[1]"))
-                .getText(), "Login"); // Assert user stays in the same page
-
-        Assert.assertTrue(loginPg.isErrorMessageDisplayed());
+        Assert.assertEquals(loginPage.getHeaderText(), "Login"); // Assert user stays in the same page
+        Assert.assertTrue(loginPage.isErrorMessageDisplayed());
     }
 
     @Test(dependsOnMethods = "loginWithValidCredentialsShouldSucceed")
@@ -41,7 +37,6 @@ public class LoginTest extends BaseAndroidSauceLabsTest {
                 .goToLogout()
                 .confirm();
 
-        Assert.assertEquals(driver.findElement(AppiumBy.xpath("(//android.widget.TextView[@text=\"Login\"])[1]"))
-                .getText(), "Login");
+        Assert.assertEquals(new LoginPage(driver).getHeaderText(), "Login");
     }
 }

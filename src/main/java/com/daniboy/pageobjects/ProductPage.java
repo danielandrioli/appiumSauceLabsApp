@@ -1,7 +1,7 @@
 package com.daniboy.pageobjects;
 
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 
@@ -17,7 +17,7 @@ public class ProductPage extends BasePage {
     @AndroidFindBy(accessibility = "Add To Cart button")
     private WebElement addToCartBtn;
 
-    public ProductPage(AppiumDriver driver) {
+    public ProductPage(AndroidDriver driver) {
         super(driver);
     }
 

@@ -2,10 +2,8 @@ package com.daniboy.tests;
 
 import com.daniboy.BaseAndroidSauceLabsTest;
 import com.daniboy.pageobjects.CartPage;
-import com.daniboy.pageobjects.CatalogPage;
 import com.daniboy.pageobjects.ProductPage;
 import com.daniboy.pageobjects.components.NavigationDrawer;
-import com.daniboy.pageobjects.components.Product;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -41,7 +39,6 @@ public class ShoppingCartTest extends BaseAndroidSauceLabsTest {
                 .clickOnCart()
                 .removeItem(productName);
 
-
         //erro (que as vezes nao ocorre) no getProducts abaixo. StaleElementReferenceException
         // isso ocorre, acredito, pq o item é removido e nao existe mais na página, deixando ele Stale quando tento pegar de novo
         // possível solução: dar um jeito de "atualizar" a página antes de executar o código abaixo
@@ -50,20 +47,31 @@ public class ShoppingCartTest extends BaseAndroidSauceLabsTest {
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {}
-        List<String> productsOnCart = new CartPage(driver).getProducts().stream().map(product -> product.getName()).toList();
+        List<String> productsOnCart = page.getProducts().stream().map(product -> product.getName()).toList();
         Assert.assertFalse(productsOnCart.contains(productName));
         System.out.println(productsOnCart); //LOG!
     }
 
     @Test
-    public void verifyAddToCartButtonIsDisabledAfterDecreasingQuantityToZero() {
-        boolean isAddToCartBtnEnabled = new NavigationDrawer(driver)
+    public void verifyProductIsRemovedAfterDecreasingQuantityToZero() {
+        String productName = "Test.allTheThings() T-Shirt";
+
+        CartPage page = new NavigationDrawer(driver)
                 .openNavigationDrawer()
                 .goToCatalogPage()
-                .clickOnProduct("Sauce Labs Bolt T-Shirt")
-                .decreaseQuantity()
-                .isAddToCartBtnEnabled();
+                .clickOnProduct(productName)
+                .addToCart()
+                .clickOnCart()
+                .clickOnMinusButton(productName);
 
-        Assert.assertFalse(isAddToCartBtnEnabled);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {}
+
+        List<String> productsOnCart = page.getProducts().stream().map(product -> product.getName()).toList();
+        Assert.assertFalse(productsOnCart.contains(productName));
+        System.out.println(productsOnCart); //LOG!
     }
+
+
 }

@@ -2,12 +2,11 @@ package com.daniboy.pageobjects;
 
 import com.daniboy.pageobjects.components.Product;
 import com.daniboy.pageobjects.components.ProductRowOnCart;
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public class CartPage extends BasePage {
     @AndroidFindBy(accessibility = "product row")
@@ -17,7 +16,7 @@ public class CartPage extends BasePage {
     @AndroidFindBy(accessibility = "total price")
     private WebElement totalPrice;
 
-    public CartPage(AppiumDriver driver) {
+    public CartPage(AndroidDriver driver) {
         super(driver);
     }
 
@@ -30,6 +29,7 @@ public class CartPage extends BasePage {
     }
 
     private List<ProductRowOnCart> getProductRows() {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         return productRows.stream().map(webElement -> new ProductRowOnCart(webElement)).toList();
     }
 

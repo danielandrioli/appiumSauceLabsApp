@@ -1,13 +1,10 @@
 package com.daniboy.pageobjects;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
-
-//    private By usernameField = AppiumBy.accessibilityId("Username input field");
     @AndroidFindBy(accessibility = "Username input field")
     private WebElement usernameField;
     @AndroidFindBy(accessibility = "Password input field")
@@ -17,7 +14,7 @@ public class LoginPage extends BasePage {
     @AndroidFindBy(accessibility = "generic-error-message")
     private WebElement errorMsg;
 
-    public LoginPage(AppiumDriver driver) {
+    public LoginPage(AndroidDriver driver) {
         super(driver);
     }
 
@@ -37,5 +34,4 @@ public class LoginPage extends BasePage {
     public Boolean isErrorMessageDisplayed() {
         return errorMsg.isDisplayed();
     }
-
 }

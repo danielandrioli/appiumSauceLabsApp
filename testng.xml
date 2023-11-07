@@ -4,7 +4,9 @@
 <suite name="Suite1" verbose="1" >
     <test name="appiumTest">
         <classes>
-            <class name="com.daniboy.tests.MainActivityTest"/>
+            <class name="com.daniboy.tests.LoginTest"/>
+            <class name="com.daniboy.tests.ProductPageTest"/>
+            <class name="com.daniboy.tests.ShoppingCartTest"/>
         </classes>
     </test>
 </suite>

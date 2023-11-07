@@ -3,10 +3,6 @@ package com.daniboy.pageobjects.components;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class ProductRowOnCart {
     private By byProductLabel = AppiumBy.accessibilityId("product label");
@@ -27,6 +23,7 @@ public class ProductRowOnCart {
                 .findElement(AppiumBy.xpath("(//android.widget.TextView[@class=\"android.widget.TextView\"])"))
                 .getText());
         product = new Product(productName, productPrice);
+
     }
 
     public ProductRowOnCart clickOnRemoveItem() {

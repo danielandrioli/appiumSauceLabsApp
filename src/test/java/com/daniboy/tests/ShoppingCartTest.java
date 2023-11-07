@@ -4,11 +4,13 @@ import com.daniboy.BaseAndroidSauceLabsTest;
 import com.daniboy.pageobjects.CartPage;
 import com.daniboy.pageobjects.ProductPage;
 import com.daniboy.pageobjects.components.NavigationDrawer;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Slf4j
 public class ShoppingCartTest extends BaseAndroidSauceLabsTest {
 
     @Test
@@ -39,17 +41,20 @@ public class ShoppingCartTest extends BaseAndroidSauceLabsTest {
                 .clickOnCart()
                 .removeItem(productName);
 
-        //erro (que as vezes nao ocorre) no getProducts abaixo. StaleElementReferenceException
-        // isso ocorre, acredito, pq o item é removido e nao existe mais na página, deixando ele Stale quando tento pegar de novo
-        // possível solução: dar um jeito de "atualizar" a página antes de executar o código abaixo
-        //Solução q deu certo: colocar um sleep com 3000L. Thread.sleep é ruim, então dar um jeito de colocar um waits.
-        //Lembre-se que o ProductRowOnCart não recebe um driver, então pense em como dar esse wait.
         try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {}
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            log.error(e.getLocalizedMessage());
+        }
+        /*
+        In this specific case, Thread.sleep seems the best solution because I'm removing an item from the page and the get method
+        below tries to get this element while it is being removed, so I get a stale element exception. WebDriverWait doesn't work
+        because it'll wait till the element appears, but actually I don't want to wait till it appears, since I removed it
+        intentionally. There are other solutions, but this seems the most practical.
+         */
         List<String> productsOnCart = page.getProducts().stream().map(product -> product.getName()).toList();
         Assert.assertFalse(productsOnCart.contains(productName));
-        System.out.println(productsOnCart); //LOG!
+        log.info("Products on cart: " + productsOnCart);
     }
 
     @Test
@@ -65,13 +70,19 @@ public class ShoppingCartTest extends BaseAndroidSauceLabsTest {
                 .clickOnMinusButton(productName);
 
         try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {}
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            log.error(e.getLocalizedMessage());
+        }
+        /*
+        In this specific case, Thread.sleep seems the best solution because I'm removing an item from the page and the get method
+        below tries to get this element while it is being removed, so I get a stale element exception. WebDriverWait doesn't work
+        because it'll wait till the element appears, but actually I don't want to wait till it appears, since I removed it
+        intentionally. There are other solutions, but this seems the most practical.
+         */
 
         List<String> productsOnCart = page.getProducts().stream().map(product -> product.getName()).toList();
         Assert.assertFalse(productsOnCart.contains(productName));
-        System.out.println(productsOnCart); //LOG!
+        log.info("Products on cart: " + productsOnCart);
     }
-
-
 }

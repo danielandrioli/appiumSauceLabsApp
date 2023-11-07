@@ -3,7 +3,6 @@ package com.daniboy.pageobjects.components;
 import com.daniboy.pageobjects.CatalogPage;
 import com.daniboy.pageobjects.LoginPage;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 

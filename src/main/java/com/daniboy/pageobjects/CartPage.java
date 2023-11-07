@@ -29,7 +29,6 @@ public class CartPage extends BasePage {
     }
 
     private List<ProductRowOnCart> getProductRows() {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         return productRows.stream().map(webElement -> new ProductRowOnCart(webElement)).toList();
     }
 
@@ -57,10 +56,6 @@ public class CartPage extends BasePage {
         return getProductRows().stream().map(productRowOnCart -> productRowOnCart.getProduct()).toList();
     }
 
-
-
-    //continuar aqui!!
-
     //Could be Predicate<Product>... But if the price change constantly, it'll break. I need the price to create new Product.
     /*
     private ProductRowOnCart getProductRow(Predicate<Product> condition) {
@@ -68,5 +63,4 @@ public class CartPage extends BasePage {
                 .findFirst().orElseThrow();
     }
      */
-
 }

@@ -5,15 +5,22 @@ import com.daniboy.pageobjects.CatalogPage;
 import com.daniboy.pageobjects.components.Product;
 import com.daniboy.pageobjects.components.ProductSortedBy;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 public class CatalogFilterTest extends BaseAndroidSauceLabsTest {
+    private CatalogPage catalogPage;
+
+    @BeforeMethod
+    public void goToTheTopOfScreen() { //After the page is scrolled down, it doesn't scroll up automatically. So I need to start the test by going to the top of the page.
+        catalogPage = new CatalogPage(driver).scrollToTop();
+    }
 
     @Test
-    public void verifyProductOrderAfterSortingByNameAscending() { //After the page is scrolled down, it doesn't scroll up automatically. So I need to start the test by going to the top of the page.
-        List<Product> products = new CatalogPage(driver).scrollToTop().sortBy(ProductSortedBy.NAME_ASCENDING).getProducts();
+    public void verifyProductOrderAfterSortingByNameAscending() {
+        List<Product> products = catalogPage.sortBy(ProductSortedBy.NAME_ASCENDING).getProducts();
         for (int i = 0; products.size() - 1 > i; i++) {
             Product product = products.get(i);
             Product nextProduct = products.get(i + 1);
@@ -26,7 +33,7 @@ public class CatalogFilterTest extends BaseAndroidSauceLabsTest {
 
     @Test
     public void verifyProductOrderAfterSortingByNameDescending() {
-        List<Product> products = new CatalogPage(driver).scrollToTop().sortBy(ProductSortedBy.NAME_DESCENDING).getProducts();
+        List<Product> products = catalogPage.sortBy(ProductSortedBy.NAME_DESCENDING).getProducts();
 
         for (int i = 0; products.size() - 1 > i; i++) {
             Product product = products.get(i);
@@ -39,7 +46,7 @@ public class CatalogFilterTest extends BaseAndroidSauceLabsTest {
 
     @Test
     public void verifyProductOrderAfterSortingByPriceAscending() {
-        List<Product> products = new CatalogPage(driver).scrollToTop().sortBy(ProductSortedBy.PRICE_ASCENDING).getProducts();
+        List<Product> products = catalogPage.sortBy(ProductSortedBy.PRICE_ASCENDING).getProducts();
 
         for (int i = 0; products.size() - 1 > i; i++) {
             Product product = products.get(i);
@@ -52,7 +59,7 @@ public class CatalogFilterTest extends BaseAndroidSauceLabsTest {
 
     @Test
     public void verifyProductOrderAfterSortingByPriceDescending() {
-        List<Product> products = new CatalogPage(driver).scrollToTop().sortBy(ProductSortedBy.PRICE_DESCENDING).getProducts();
+        List<Product> products = catalogPage.sortBy(ProductSortedBy.PRICE_DESCENDING).getProducts();
 
         for (int i = 0; products.size() - 1 > i; i++) {
             Product product = products.get(i);

@@ -2,48 +2,55 @@ package com.daniboy.pageobjects.components;
 
 import com.daniboy.pageobjects.CatalogPage;
 import com.daniboy.pageobjects.LoginPage;
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.By;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
-import java.time.Duration;
+public class NavigationDrawer {
+    @AndroidFindBy(accessibility = "open menu")
+    private WebElement menu;
+    @AndroidFindBy(accessibility = "menu item log in")
+    private WebElement login;
+    @AndroidFindBy(accessibility = "menu item log out")
+    private WebElement logout;
+    @AndroidFindBy(accessibility = "menu item reset app")
+    private WebElement resetAppState;
+    @AndroidFindBy(accessibility = "menu item catalog")
+    private WebElement catalog;
 
-public class NavigationDrawer { //COLOCAR TUDO ANDROIDFINDBY!!!!!!
+
     private AndroidDriver driver;
-    private By menuBy = AppiumBy.accessibilityId("open menu");
-    private By logInBy = AppiumBy.accessibilityId("menu item log in");
-    private By logOutBy = AppiumBy.accessibilityId("menu item log out");
-    private By resetAppStateBy = AppiumBy.accessibilityId("menu item reset app");
-    private By catalogBy = AppiumBy.accessibilityId("menu item catalog");
 
     public NavigationDrawer(AndroidDriver driver) {
         this.driver = driver;
-        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+//        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
     public NavigationDrawer openNavigationDrawer() {
-        driver.findElement(menuBy).click();
+        menu.click();
         return this;
     }
 
     public LoginPage goToLoginPage() {
-        driver.findElement(logInBy).click();
+        login.click();
         return new LoginPage(driver);
     }
 
     public AlertDialog goToResetAppState() {
-        driver.findElement(resetAppStateBy).click();
+        resetAppState.click();
         return new AlertDialog(driver);
     }
 
     public AlertDialog goToLogout() {
-        driver.findElement(logOutBy).click();
+        logout.click();
         return new AlertDialog(driver);
     }
 
     public CatalogPage goToCatalogPage() {
-        driver.findElement(catalogBy).click();
+        catalog.click();
         return new CatalogPage(driver);
     }
-
 }

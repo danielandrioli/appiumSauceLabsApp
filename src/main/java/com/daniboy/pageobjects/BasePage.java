@@ -8,6 +8,8 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import java.time.Duration;
+
 public abstract class BasePage {
     @AndroidFindBy(accessibility = "cart badge")
     protected WebElement cart;
@@ -21,6 +23,7 @@ public abstract class BasePage {
     public BasePage(AndroidDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
     }
 
     public CartPage clickOnCart() {

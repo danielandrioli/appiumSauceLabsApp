@@ -4,7 +4,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.remote.AutomationName;
 import org.openqa.selenium.Platform;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.net.MalformedURLException;
@@ -40,8 +40,8 @@ public class BaseAndroidSauceLabsTest {
         return options;
     }
 
-    @AfterTest
-    public void tardown() {
+    @AfterClass // It was AfterTest, but then it was causing flaky tests when all testes were executed in testng.xml. With AfterClass I'm isolating more the testes and everything is running good! ;)
+    public void teardown() {
         driver.quit();
     }
 }

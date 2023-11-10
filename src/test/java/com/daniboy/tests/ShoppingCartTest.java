@@ -54,7 +54,7 @@ public class ShoppingCartTest extends BaseAndroidSauceLabsTest {
          */
         List<String> productsOnCart = page.getProducts().stream().map(product -> product.getName()).toList();
         Assert.assertFalse(productsOnCart.contains(productName));
-        log.info("Products on cart: " + productsOnCart);
+        log.info("verifyRemoveItemButtonWorks() - Products on cart: " + productsOnCart);
     }
 
     @Test
@@ -83,6 +83,6 @@ public class ShoppingCartTest extends BaseAndroidSauceLabsTest {
 
         List<String> productsOnCart = page.getProducts().stream().map(product -> product.getName()).toList();
         Assert.assertFalse(productsOnCart.contains(productName));
-        log.info("Products on cart: " + productsOnCart);
+        log.info("verifyProductIsRemovedAfterDecreasingQuantityToZero() - Products on cart: " + productsOnCart);
     }
 }

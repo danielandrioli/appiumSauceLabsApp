@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 
 import java.time.Duration;
 
-public class NavigationDrawer { //COLOCAR TUDO ANDROIDFINDBY
+public class NavigationDrawer { //COLOCAR TUDO ANDROIDFINDBY!!!!!!
     private AndroidDriver driver;
     private By menuBy = AppiumBy.accessibilityId("open menu");
     private By logInBy = AppiumBy.accessibilityId("menu item log in");
@@ -18,7 +18,7 @@ public class NavigationDrawer { //COLOCAR TUDO ANDROIDFINDBY
 
     public NavigationDrawer(AndroidDriver driver) {
         this.driver = driver;
-        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
+        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
     public NavigationDrawer openNavigationDrawer() {

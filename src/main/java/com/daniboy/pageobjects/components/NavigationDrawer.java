@@ -26,7 +26,6 @@ public class NavigationDrawer {
     public NavigationDrawer(AndroidDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-//        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
     public NavigationDrawer openNavigationDrawer() {

@@ -53,9 +53,12 @@ Anyway, here's the resume:
 - Install Appium through Node: `npm i -g appium@next`. If you don't get the latest version, try `npm install --location=global appium@latest`. You can check the version running `appium -v`
 - Install Appium Android uiautomator2 driver: `appium driver install uiautomator2`. Feel free to install the drivers you want
 - Install Android Studio and create a virtual device
-- Configure the user and environment variable ANDROID_HOME. Check it (PT-BR): https://youtu.be/yuKlc-a5z5k?si=7E9sJydltJ9_9Bqe&t=73
-- Install Appium doctor: `npm install -g appium-doctor`. Run it: `appium-doctor --android`
-Check the "manual fixes needed" and fix them
+- Configure Android Path in your environment variables.
+  - ANDROID_HOME: root android sdk directory
+  - PATH: ANDROID_HOME + the following paths = platform-tools, tools, platforms, build-tools  
+  - Check it for a visual explanation (PT-BR): https://youtu.be/yuKlc-a5z5k?si=7E9sJydltJ9_9Bqe&t=73
+- Install Appium doctor: `npm install -g appium-doctor`. Run it: `appium-doctor --android`  
+  - Check the "manual fixes needed" and fix them
 - If Appium Doctor tells you apkanalyzer.bat is not found, maybe it exists, but you need to rename it putting .bat at the end of the file name. This was my case. Probable apkanalyzer location: C:\Users\YOUR_USER_NAME\AppData\Local\Android\Sdk\tools\bin
 - Install Appium inspector or run it on the web: https://inspector.appiumpro.com/
 - Configure the Appium Inspector. Below is the image of my configuration:
